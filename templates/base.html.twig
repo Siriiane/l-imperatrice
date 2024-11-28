@@ -13,8 +13,9 @@
         {% endblock %}
     </head>
     <body>
+    {% block header %}
         {% include 'header.html.twig' %}
-        
+       {% endblock %} 
         {% block body %}{% endblock %}
 
         {% include 'footer.html.twig' %}

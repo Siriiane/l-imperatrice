@@ -1,9 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}L'impératrice{% endblock %}
+{% block title %}L'impératrice
+{% endblock %}
 
+{% block header %}{% endblock %}
 {% block body %}
-<div class="example-wrapper">
-    <h1> {{ controller_name }} </h1> 
-</div>
+	{{ include('header.html.twig') }}
+	<section class="section_home">
+
+		<p class="text.home">
+			<br>
+			Bienvenue dans le Royaume de L'Impératrice
+			<br>
+			<br>
+
+			Chers sujets,
+			<br>
+			Dans notre royaume, chaque être est une étoile, et chaque étoile mérite une couronne. L'Impératrice vous invite à découvrir des couronnes uniques, forgées avec soin et lumière, symboles de votre grandeur intérieure.
+										 Votre couronne vous attend.
+			<br>
+			Avec grâce et bienveillance,
+										L'Impératrice
+
+
+		</p>
+
+		<div>
+
+			<div class="img_crown_home"></div>
+		</div>
+	</section>
 {% endblock %}
