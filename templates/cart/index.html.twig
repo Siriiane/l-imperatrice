@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Panier</h1>
+	<div id="produits-list">
+		{% if produits is empty %}
+			<h2>Panier</h2>
+			<div id="cart">
+				<p>Votre panier est vide.</p>
+			</div>
+		{% else %}
+			{% for produit in produits %}
+				<div class="produits-card" data-id="{{ produit.produit.id }}">
+					<h2>{{ produit.produit.nom }}</h2>
+					<p>{{ produit.produit.description }}</p>
+					<p>{{ produit.produit.prix }}
+						€</p>
+						<!-- Bouton pour retirer du panier -->
+					<button class="remove-from-cart" data-id="{{ produit.produit.id }}">
+						Retirer du panier
+					</button>
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+{% endblock %}
+

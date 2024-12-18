@@ -1,13 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Nos Produits
+{% endblock %}
 
 {% block body %}
+	<div class="products-wrapper">
+		<h1>Nos Produits</h1>
+		<div class="product-list">
+			{% for produit in produits %}
+				<div class="product-card">
+					<a href="{{path('app_details_produit', {id: produit.id})}}" title="Cliquez pour plus de details">
+						<img src="{{ asset('assets/images/' ~ produit.image ) }}" alt="Produit 1" class="product-image">
+					</a>
+					<h2 class="product-title">{{produit.nom}}</h2>
+					<span class="product-price">{{produit.prix}}
+						€</span>
+					<a href="#" class="btn-add-to-cart" onclick="addPanier(event,{{produit.id}})">Ajouter au panier</a>
+					<p id="message-{{ produit.id }}" style="display: none; color: green;">
+						Produit ajouté au panier !
+					</p>
 
-
-<div class="example-wrapper">
-    
-
-   
-</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}
