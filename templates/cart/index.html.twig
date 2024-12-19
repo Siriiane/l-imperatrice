@@ -9,19 +9,39 @@
 				<p>Votre panier est vide.</p>
 			</div>
 		{% else %}
-			{% for produit in produits %}
-				<div class="produits-card" data-id="{{ produit.produit.id }}">
-					<h2>{{ produit.produit.nom }}</h2>
-					<p>{{ produit.produit.description }}</p>
-					<p>{{ produit.produit.prix }}
-						€</p>
-						<!-- Bouton pour retirer du panier -->
-					<button class="remove-from-cart" data-id="{{ produit.produit.id }}">
-						Retirer du panier
-					</button>
-				</div>
-			{% endfor %}
+			<table>
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Description</th>
+						<th>Prix unitaire</th>
+						<th>Quantité</th>
+						<th>Total par article</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for produit in produits %}
+						<tr id="product-row-{{ produit.produit.id }}">
+							<td>{{ produit.produit.nom }}</td>
+							<td>{{ produit.produit.description }}</td>
+							<td>{{ produit.produit.prix | number_format(2, ',', ' ') }}
+								€</td>
+							<td id="quantity-{{ produit.produit.id }}">{{ produit.quantite }}</td>
+							<td id="total-item-price-{{ produit.produit.id }}">{{ produit.totalItemPrice | number_format(2, ',', ' ') }}
+								€</td>
+							<td>
+								<button class="remove-from-cart" onclick="deleteArticle(event, {{produit.produit.id}})">
+									Retirer du panier
+								</button>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<h2>Total général :
+				<span id="total-price">{{ totalPrice | number_format(2, ',', ' ') }}</span>
+				€</h2>
 		{% endif %}
 	</div>
 {% endblock %}
-

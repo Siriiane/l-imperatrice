@@ -16,7 +16,18 @@ class CartController extends AbstractController
     public function index(SessionInterface $session): Response
     {
         $cart = $session->get('cart', []);
-        return $this->render('cart/index.html.twig', ['produits' => $cart]);
+
+        // Calcul des totaux
+        $totalPrice = 0;
+        foreach ($cart as &$item) {
+            $item['totalItemPrice'] = $item['produit']->getPrix() * $item['quantite'];
+            $totalPrice += $item['totalItemPrice'];
+        }
+
+        return $this->render('cart/index.html.twig', [
+            'produits' => $cart,
+            'totalPrice' => $totalPrice,
+        ]);
     }
 
     #[Route('/cart/add', name: 'cart_add')]
@@ -32,43 +43,59 @@ class CartController extends AbstractController
 
         $cart = $session->get('cart', []);
         $found = false;
-        
+
         foreach ($cart as &$c) {
-                if ($c['produit']->getId() == $product->getId()) {
-                    $c['quantite']++;
-                    $found = true;
-                    break;
-                }
+            if ($c['produit']->getId() == $product->getId()) {
+                $c['quantite']++;
+                $found = true;
+                break;
             }
+        }
 
         if (!$found) {
             $cart[] = ['produit' => $product, 'quantite' => 1];
         }
 
-
         $session->set('cart', $cart);
-
-        $total = count($cart);
-
+        
+        
+        // Calcul du total des articles dans le panier
+        $totalItems = array_sum(array_column($cart, 'quantite'));
+        $session->set('nb', $totalItems);
         return new JsonResponse([
             'cart' => $cart,
-            'total' => $total,
+            'totalItems' => $totalItems,
             'message' => 'Produit ajouté au panier',
         ]);
     }
 
-    #[Route('/cart/remove/{id}', name: 'cart_remove', methods: ['DELETE'])]
-    public function remove(int $id, SessionInterface $session): JsonResponse
+    #[Route('/cart/remove', name: 'cart_remove')]
+    public function remove(SessionInterface $session, Request $request): JsonResponse
     {
+        $array = json_decode($request->getContent(), true);
+        $id = $array['id'];
         $cart = $session->get('cart', []);
-        unset($cart[$id]);
+
+        foreach ($cart as $key => $item) {
+            if ($item['produit']->getId() == $id) {
+                unset($cart[$key]);
+                break;
+            }
+        }
+
         $session->set('cart', $cart);
 
-        $total = array_reduce($cart, fn($sum, $item) => $sum + $item['price'] * $item['quantity'], 0);
+        // Recalcul du total général et des quantités
+        $totalPrice = array_reduce($cart, function ($sum, $item) {
+            return $sum + $item['produit']->getPrix() * $item['quantite'];
+        }, 0);
 
+        $totalItems = array_sum(array_column($cart, 'quantite'));
+        $session->set('nb', $totalItems);
         return new JsonResponse([
-            'cart' => $cart,
-            'total' => $total,
+            'cart' => array_values($cart), // Réindexer le tableau pour le JSON
+            'totalPrice' => $totalPrice,
+            'totalItems' => $totalItems,
             'message' => 'Produit supprimé du panier',
         ]);
     }
