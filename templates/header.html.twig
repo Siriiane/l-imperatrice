@@ -4,12 +4,30 @@
 		<nav>
 			<div><img src="{{asset('assets/images/Logo_imperatrice_transparent.png')}}" alt=""></div>
 			<ul>
-				<li><a href="{{path('app_home')}}">Accueil</a></li>
-				<li><a href="{{path('app_produits')}}">Produits</a></li>
-				<li><a href="{{path('app_register')}}">Inscription</a></li>
-				<li><a href="{{path('app_login')}}">Connexion</a></li>
-				<li><a href="{{path('app_profil')}}">Mon Profile</a></li>
-				<li><a href="{{ path('app_cart') }}">Panier</a></li>
+				<li>
+					<a href="{{path('app_home')}}">Accueil</a>
+				</li>
+				<li>
+					<a href="{{path('app_produits')}}">Produits</a>
+				</li>
+				{% if app.user %}
+					<li>
+						<a href="{{path('app_profil')}}">Mon Profil</a>
+					</li>
+					<li>
+						<a href="{{path('app_login')}}">Déconnexion</a>
+					</li>
+				{% else %}
+					<li>
+						<a href="{{path('app_register')}}">Inscription</a>
+					</li>
+					<li>
+						<a href="{{path('app_login')}}">Connexion</a>
+					</li>
+				{% endif %}
+				<li>
+					<a href="{{ path('app_cart') }}">Panier</a>
+				</li>
 
 			</ul>
 		</nav>
