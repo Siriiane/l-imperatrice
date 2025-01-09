@@ -350,6 +350,38 @@ a.button:hover {
 }
 
 /* ==========================================
+   Responsive avec media queries 
+========================================== */
+
+/* Résolution par défaut (écrans larges) */
+body {
+  font-size: 16px;
+}
+
+/* Écrans moyens : tablettes */
+@media (max-width: 768px) {
+  body {
+      font-size: 14px;
+  }
+  .container {
+      padding: 10px;
+  }
+}
+
+/* Écrans petits : téléphones */
+@media (max-width: 576px) {
+  body {
+      font-size: 12px;
+  }
+  .container {
+      padding: 5px;
+  }
+  .navbar {
+      flex-direction: column;
+  }
+}
+
+/* ==========================================
    Pied de page
 ========================================== */
 footer {
