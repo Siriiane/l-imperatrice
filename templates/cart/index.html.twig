@@ -27,11 +27,17 @@
 							<td>{{ produit.produit.description }}</td>
 							<td>{{ produit.produit.prix | number_format(2, ',', ' ') }}
 								€</td>
-							<td id="quantity-{{ produit.produit.id }}">{{ produit.quantite }}</td>
+							<td>
+								<select class="quantity-select" data-product-id="{{ produit.produit.id }}" data-url="{{ path('update_quantity') }}">
+									{% for i in 1..10 %}
+										<option value="{{ i }}" {% if i == produit.quantite %} selected {% endif %}>{{ i }}</option>
+									{% endfor %}
+								</select>
+							</td>
 							<td id="total-item-price-{{ produit.produit.id }}">{{ produit.totalItemPrice | number_format(2, ',', ' ') }}
 								€</td>
 							<td>
-								<button class="remove-from-cart" onclick="deleteArticle(event, {{produit.produit.id}})">
+								<button class="remove-from-cart" onclick="deleteArticle(event, {{ produit.produit.id }})">
 									Retirer du panier
 								</button>
 							</td>
@@ -45,3 +51,4 @@
 		{% endif %}
 	</div>
 {% endblock %}
+

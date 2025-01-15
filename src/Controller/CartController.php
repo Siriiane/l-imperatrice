@@ -57,11 +57,11 @@ class CartController extends AbstractController
         }
 
         $session->set('cart', $cart);
-        
-        
+
         // Calcul du total des articles dans le panier
         $totalItems = array_sum(array_column($cart, 'quantite'));
         $session->set('nb', $totalItems);
+
         return new JsonResponse([
             'cart' => $cart,
             'totalItems' => $totalItems,
@@ -92,11 +92,50 @@ class CartController extends AbstractController
 
         $totalItems = array_sum(array_column($cart, 'quantite'));
         $session->set('nb', $totalItems);
+
         return new JsonResponse([
             'cart' => array_values($cart), // Réindexer le tableau pour le JSON
             'totalPrice' => $totalPrice,
             'totalItems' => $totalItems,
             'message' => 'Produit supprimé du panier',
+        ]);
+    }
+
+    #[Route('/cart/update-quantity', name: 'update_quantity', methods: ['POST'])]
+    public function updateQuantity(SessionInterface $session, Request $request): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+        $id = $data['id'];
+        $quantity = $data['quantity'];
+
+        if ($quantity < 1) {
+            return new JsonResponse(['error' => 'Quantité invalide'], 400);
+        }
+
+        $cart = $session->get('cart', []);
+        foreach ($cart as &$item) {
+            if ($item['produit']->getId() == $id) {
+                $item['quantite'] = $quantity;
+                $item['totalItemPrice'] = $item['produit']->getPrix() * $quantity;
+                break;
+            }
+        }
+
+        $session->set('cart', $cart);
+
+        // Recalcul des totaux
+        $totalPrice = array_reduce($cart, function ($sum, $item) {
+            return $sum + $item['totalItemPrice'];
+        }, 0);
+
+        $totalItems = array_sum(array_column($cart, 'quantite'));
+        $session->set('nb', $totalItems);
+
+        return new JsonResponse([
+            'cart' => $cart,
+            'totalPrice' => $totalPrice,
+            'totalItems' => $totalItems,
+            'message' => 'Quantité mise à jour',
         ]);
     }
 }
