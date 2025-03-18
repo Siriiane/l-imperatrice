@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommandeController!
+{% endblock %}
+
+{% block body %}
+<h3> Entrez votre adresse de livraison </h3>
+	{{form_start(form)}}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
+{% endblock %}

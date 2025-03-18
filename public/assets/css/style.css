@@ -1,9 +1,9 @@
-
 /* ==========================================
    Importation des polices
 ========================================== */
-@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap");
+
+/* @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap");
 
 /* ==========================================
    Globales
@@ -12,35 +12,27 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Cormorant Garamond", serif;
 }
 
 body {
-  background-color: #292929;
-  font-family: "Great Vibes", cursive;
+  /* background-color: #292929; */
+  /* font-family: "Playfair", display; */
 }
 
 /* ==========================================
    Typographie
 ========================================== */
+
 h1 {
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 700;
-  color: #fff;
-  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
-h2,
-h3,
-h4,
-h5 {
-  font-family: "Great Vibes", cursive;
-}
-
-.text-home {
-  font-family: "Great Vibes", cursive;
-}
-p {
-  font-family: "Playfair Display", serif;
+.contain {
+  min-height: 70vh;
 }
 
 /* ==========================================
@@ -61,7 +53,6 @@ p {
 }
 
 .quiP {
-  font-family: "Great Vibes", cursive;
   font-size: 30px;
   text-align: center;
   display: block;
@@ -158,7 +149,7 @@ a.button:hover {
 
 .img_crown_home {
   background-image: url("../images/DALL·E\ 2024-11-26\ 12.21.58\ -\ A\ realistic\ and\ elegant\ photo-style\ background\,\ featuring\ a\ golden\ crown\ with\ intricate\ designs\ placed\ on\ a\ soft\,\ luxurious\ velvet\ fabric\ in\ black.\ Th.webp");
-  height: 100vh;
+  height: 120vh;
   width: 100%;
   background-size: cover;
   background-position: center;
@@ -210,7 +201,7 @@ a.button:hover {
 /* ==========================================
    Formulaire d'inscription
 ========================================== */
-.forminsc {
+/* .forminsc {
   background-color: #727272;
   margin: auto;
   color: #fff;
@@ -255,9 +246,11 @@ a.button:hover {
   max-width: 400px;
   text-align: center;
 }
+
 .form-inscription h1 {
   margin-bottom: 20px;
 }
+
 .form-inscription .form {
   display: flex;
   flex-wrap: wrap;
@@ -273,7 +266,67 @@ a.button:hover {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+} */
+/* Formulaire d'inscription */
+.forminsc,
+.form-inscription {
+  background: linear-gradient(135deg, #6a6a6a, #4a4a4a);
+  margin: auto;
+  color: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+
+h1 {
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+input,
+select,
+textarea {
+  margin: 10px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+  color: #333;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #ae8407;
+}
+
+.btn {
+  margin: auto;
+  background: #ae8407;
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #c89f0f;
+  transform: scale(1.05);
+}
+
 /* ==========================================
    Produits
 ========================================== */
@@ -350,6 +403,91 @@ a.button:hover {
 }
 
 /* ==========================================
+
+CSS formulaire de paiement
+
+=============================================*/
+
+form[name="payment"] {
+  background-color: #222;
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  margin: auto;
+  font-family: "Cormorant Garamond", serif;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Style des labels */
+.payment label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Style des champs de saisie */
+.payment input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #fff;
+  background-color: transparent;
+  color: #fff;
+  border-radius: 4px;
+  outline: none;
+}
+
+/* Placeholder style */
+.payment input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Style du bouton */
+.payment button {
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.payment button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Focus sur les champs */
+.payment input:focus {
+  border-color: #fff;
+  box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6);
+}
+
+/* Style des messages d'erreur */
+.payment .invalid-feedback {
+  color: #ff4d4d;
+  font-size: 0.9em;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+#payment div {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+}
+
+#payment div label,
+#payment div input {
+  width: 50%;
+}
+
+/* ==========================================
    Responsive avec media queries 
 ========================================== */
 
@@ -361,23 +499,26 @@ body {
 /* Écrans moyens : tablettes */
 @media (max-width: 768px) {
   body {
-      font-size: 14px;
+    font-size: 14px;
   }
+
   .container {
-      padding: 10px;
+    padding: 10px;
   }
 }
 
 /* Écrans petits : téléphones */
 @media (max-width: 576px) {
   body {
-      font-size: 12px;
+    font-size: 12px;
   }
+
   .container {
-      padding: 5px;
+    padding: 5px;
   }
+
   .navbar {
-      flex-direction: column;
+    flex-direction: column;
   }
 }
 
@@ -402,4 +543,4 @@ footer ul li {
 footer ul li a {
   color: #fff;
   text-decoration: none;
-} 
+}

@@ -81,3 +81,70 @@ function deleteArticle(event, id) {
       console.log(error);
     });
 }
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  // ICI C EST POUR CHANGER LA QUANTITE DES PRODUITS 
+  // On récupère tous les SELECT
+  const QUANTITES = document.querySelectorAll(".quantity-select");
+
+  // Pour chacun des selects
+  QUANTITES.forEach((quantite) => {
+    // On ajoute un ecouteur d'evenement qui se déclanchera à chaque changement (quand tu vas choisir une autre quantité)
+    quantite.addEventListener('change', function () {
+      // On récupère l'index des options choisies dans le select
+      const CHOICE = quantite.selectedIndex
+      const INDEXQUANTITE = quantite[CHOICE].value;
+      console.log(INDEXQUANTITE);
+      // On récupère l'id du produit concerné
+      const ID = quantite.getAttribute('data-product-id');
+      // On récupère l'URL où la requête sera envoyée
+
+      const URL = quantite.getAttribute('data-url');
+      // Méthode AJAX
+      fetch(URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ quantite: INDEXQUANTITE, id: ID })
+      }).then((result) => result.json()).then((result) => {
+        const UNITPRICE = parseFloat(document.querySelector('#unit-price-' + result.itemId).textContent);
+        const TOTALITEMPRICE = INDEXQUANTITE * UNITPRICE;
+
+        const TOTALPRICE = parseFloat(result.totalPrice);
+
+        // Vérifier si le total est un entier (sans décimale)
+        const formattedTotalItemPrice = TOTALITEMPRICE % 1 === 0
+          ? TOTALITEMPRICE.toFixed(2).replace('.00', ',00')  // Si entier, ajouter ",00"
+          : TOTALITEMPRICE.toFixed(2).replace('.', ',');    // Sinon, remplacer le point par une virgule
+
+        const totalPRICE = TOTALPRICE % 1 === 0 ? TOTALPRICE.toFixed(2).replace('.00', ',00') : TOTALPRICE.toFixed(2).replace('.00', ',00');
+
+        document.querySelector('#total-price').textContent = totalPRICE;
+        document.querySelector('#total-item-price-' + result.itemId).textContent = formattedTotalItemPrice + '€';
+      }).catch((error) => console.log(error));
+    })
+  })
+
+  // ICI C EST POUR SUPPRIMER TOUT LE PANIER
+
+  const SUPP = document.querySelector('#total-empty-cart');
+
+  SUPP.addEventListener('click', function () {
+    const URL = this.getAttribute('data-url');
+    fetch(URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ supp: true })
+    }).then((result) => result.json()).then((result) => {
+      if (result.success) {
+        document.querySelector('#produits-list').innerHTML = "<h2>Panier</h2><div id='cart'><p>Votre panier est vide.</p></div>"
+      }
+    }).catch((error) => console.log(error));
+  })
+})

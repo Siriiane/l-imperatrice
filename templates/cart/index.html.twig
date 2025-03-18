@@ -25,8 +25,9 @@
 						<tr id="product-row-{{ produit.produit.id }}">
 							<td>{{ produit.produit.nom }}</td>
 							<td>{{ produit.produit.description }}</td>
-							<td>{{ produit.produit.prix | number_format(2, ',', ' ') }}
-								€</td>
+							<td>
+								<span id="unit-price-{{ produit.produit.id }}">{{ produit.produit.prix | number_format(2, ',', ' ') }}
+								</span>€</td>
 							<td>
 								<select class="quantity-select" data-product-id="{{ produit.produit.id }}" data-url="{{ path('update_quantity') }}">
 									{% for i in 1..10 %}
@@ -45,10 +46,19 @@
 					{% endfor %}
 				</tbody>
 			</table>
-			<h2>Total général :
-				<span id="total-price">{{ totalPrice | number_format(2, ',', ' ') }}</span>
-				€</h2>
+
+			<!-- à Mettre en CSS la DIV et le Bouton -->
+			<div style="display: flex; align-items: center;">
+				<h2>Total général :
+					<span id="total-price">{{ totalPrice | number_format(2, ',', ' ') }}</span>
+					€</h2>
+				<button id="total-empty-cart" data-url="{{path('delete_cart')}}" style="margin-left: 10px;">
+					Vider le panier
+				</button>
+				<button>
+					<a href="{{path('app_adresse')}}">Valider le panier</a>
+				</button>
+			</div>
 		{% endif %}
 	</div>
 {% endblock %}
-
