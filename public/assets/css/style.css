@@ -33,6 +33,7 @@ h1 {
 
 .contain {
   min-height: 70vh;
+  background-image: url(../images/couronne_accueil.webp);
 }
 
 /* ==========================================
@@ -45,11 +46,17 @@ h1 {
 }
 
 .allQui {
-  background-color: #7e7e7e;
+  background-color: #171614;
+  margin: 0 auto;
   color: #fff;
-  width: 35%;
-  margin: auto;
+  width: 50%;
   align-items: center;
+}
+
+.moit-moit {
+  width: 25%;
+  background-image: url(../images/DALL·E\ 2024-12-02\ 15.20.38\ -\ A\ beautifully\ detailed\ crown\,\ inspired\ by\ a\ fairytale\ princess\ like\ Belle\,\ with\ intricate\ golden\ patterns\,\ a\ central\ rose-shaped\ gemstone\,\ and\ sparkli.webp);
+  background-position: center;
 }
 
 .quiP {
@@ -148,7 +155,7 @@ a.button:hover {
 }
 
 .img_crown_home {
-  background-image: url("../images/DALL·E\ 2024-11-26\ 12.21.58\ -\ A\ realistic\ and\ elegant\ photo-style\ background\,\ featuring\ a\ golden\ crown\ with\ intricate\ designs\ placed\ on\ a\ soft\,\ luxurious\ velvet\ fabric\ in\ black.\ Th.webp");
+  background-image: url("../images/couronne_accueil.webp");
   height: 120vh;
   width: 100%;
   background-size: cover;
@@ -268,10 +275,14 @@ a.button:hover {
   transition: background-color 0.3s, color 0.3s;
 } */
 /* Formulaire d'inscription */
+
+.form_reg {
+  height : 100%;
+}
 .forminsc,
 .form-inscription {
   background: linear-gradient(135deg, #6a6a6a, #4a4a4a);
-  margin: auto;
+  margin: 20px auto;
   color: #fff;
   padding: 25px;
   border-radius: 12px;
@@ -279,7 +290,6 @@ a.button:hover {
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
-
 h1 {
   margin-bottom: 15px;
   font-size: 22px;
@@ -415,7 +425,7 @@ form[name="payment"] {
   border-radius: 8px;
   max-width: 500px;
   margin: auto;
-  font-family: "Cormorant Garamond", serif;
+
   box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
 }
 
@@ -488,6 +498,31 @@ form[name="payment"] {
 }
 
 /* ==========================================
+   conditions générales de ventes
+========================================== */
+
+.conditions {
+  margin: 30px 0;
+  p {
+    margin: 20px auto;
+    text-align: justify;
+    width: 1000px;
+    font-size: 19px;
+    font-weight: 600;
+  }
+
+  h1 {
+    text-align: center;
+    text-decoration: underline;
+    font-size: 2rem;
+  }
+
+  h2 {
+    text-align: center;
+  }
+}
+
+/* ==========================================
    Responsive avec media queries 
 ========================================== */
 
@@ -543,4 +578,16 @@ footer ul li {
 footer ul li a {
   color: #fff;
   text-decoration: none;
+}
+
+.contact {
+  width: 700px;
+  margin: 40px auto;
+  background: linear-gradient(135deg, #6a6a6a, #4a4a4a);
+  color: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
