@@ -1,18 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil - {{ app.user.firstname }}{% endblock %}
+{% block title %}Profil -
+	{{ app.user.firstname }}
+{% endblock %}
 
 {% block body %}
-<div class="profil">
-    <h1>Bienvenue sur votre profil, {{ app.user.firstname }} !</h1>
+	<div class='contain'>
+		<div class="profil">
+			<h1>Bienvenue sur votre profil,
+				{{ app.user.firstname }}
+				!</h1>
 
-    <div class="profil-details">
-        <p><strong>Email :</strong> {{ app.user.email }}</p>
-    </div>
+			<div class="profil-details">
+				<p>
+					<strong>Email :</strong>
+					{{ app.user.email }}</p>
+			</div>
 
-    <div class="actions">
-        <a href="" class="btn btn-primary">Modifier mon profil</a>
-        <a href="{{ path('app_logout') }}" class="btn btn-danger">Se déconnecter</a>
-    </div>
-</div>
+			<div class="actions">
+				<a href="" class="btn btn-primary">Modifier mon profil</a>
+				<a href="{{ path('app_logout') }}" class="btn btn-danger">Se déconnecter</a>
+			</div>
+		</div>
+	</div>
 {% endblock %}

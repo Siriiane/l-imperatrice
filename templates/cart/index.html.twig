@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1>Panier</h1>
-	<div id="produits-list">
+<section class="contain">
+<div class="contain">
+		<h1 id="h1-panier">Panier</h1>
+	<div id="produits-list" style="min-height: 70vh;">
 		{% if produits is empty %}
-			<h2>Panier</h2>
 			<div id="cart">
 				<p>Votre panier est vide.</p>
 			</div>
@@ -48,17 +49,21 @@
 			</table>
 
 			<!-- à Mettre en CSS la DIV et le Bouton -->
-			<div style="display: flex; align-items: center;">
+			<div style="display: flex; align-items: center; justify-content: space-between;">
 				<h2>Total général :
 					<span id="total-price">{{ totalPrice | number_format(2, ',', ' ') }}</span>
 					€</h2>
+					<div>
 				<button id="total-empty-cart" data-url="{{path('delete_cart')}}" style="margin-left: 10px;">
 					Vider le panier
 				</button>
 				<button>
 					<a href="{{path('app_adresse')}}">Valider le panier</a>
 				</button>
+					</div>
 			</div>
 		{% endif %}
 	</div>
+</div>
+</section>
 {% endblock %}
