@@ -27,6 +27,12 @@ class CommandeController extends AbstractController
     #[Route('/livraison', name: 'app_adresse')]
     public function livraison(Request $request, SessionInterface $sessionInterface, EntityManagerInterface $entityManagerInterface): Response
     {
+        if (!$this->getUser()) {
+            $this->addFlash('error', 'Merci de vous connecter avant de valider votre adresse');
+            $request->getSession()->set('_security.main.target_path', $this->generateUrl('app_adresse'));
+
+            return $this->redirectToRoute('app_login');
+        }
         $commandeData = [];
         $prixTotal = 0;
         $panier = $sessionInterface->get('cart', []);

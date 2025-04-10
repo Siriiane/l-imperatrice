@@ -36,10 +36,6 @@ class PaiementController extends AbstractController
         $commande->setVille($commandeData['ville']);
         $commande->setPays($commandeData['pays']);
         $commande->setPrixTotal($commandeData['prixTotal']);
-        if (!$this->getUser()) {
-            $this->addFlash('error', 'Merci de vous connecter avant de valider votre adresse');
-            return $this->redirectToRoute('app_login');
-        }
         $commande->setUser($this->getUser());
         // Ajouter les produits à la commande
         foreach ($commandeData as $data) {
