@@ -5,7 +5,7 @@
 {% block body %}
 	<div class="detail">
 		<div class="detail-img">
-			<img src="{{ asset('assets/images/' ~ produit.image ) }}" alt="Produit 1">
+			<img src="{{ asset('assets/images/' ~ produit.image ) }}" alt="{{produit.description}}">
 		</div>
 		<div class="example-wrapper">
 			<h2 class="product-title">{{produit.nom}}</h2>

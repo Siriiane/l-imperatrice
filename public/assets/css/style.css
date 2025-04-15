@@ -64,6 +64,8 @@ h1 {
   position: relative;
   min-height: 70vh;
   overflow: hidden;
+  color: white;
+  
 }
 
 .contain::before {
@@ -658,17 +660,17 @@ body {
     text-align: left;
     margin: 0;
   }
-  
-  .section_home{
+
+  .section_home {
     display: flex;
     flex-direction: column;
-  } 
+  }
 
-  .img_crown_div{
+  .img_crown_div {
     width: 100vw;
   }
-  .img_crown_home{
-    height: 3ù00px;
+  .img_crown_home {
+    height: 300px;
     width: 100vw;
   }
 
@@ -724,6 +726,23 @@ body {
         }
       }
     }
+  }
+
+  /* Page produits */
+  .product-title {
+    margin-bottom: 0;
+  }
+
+  .product-price {
+    font-size: 25px;
+  }
+  .btn-add-to-cart {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .product-image {
+    max-height: 500px;
   }
 }
 
