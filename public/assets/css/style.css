@@ -10,7 +10,7 @@
 ========================================== */
 * {
   margin: 0;
-  padding: 0; 
+  padding: 0;
   box-sizing: border-box;
   font-family: "Cormorant Garamond", serif;
 }
@@ -65,7 +65,6 @@ h1 {
   min-height: 70vh;
   overflow: hidden;
   color: white;
-  
 }
 
 .contain::before {
@@ -645,6 +644,56 @@ body {
     font-size: 35px;
     padding: 20px;
   }
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+    width: 100%;
+  }
+
+  table td {
+    font-size: 30px;
+  }
+
+  table td:nth-child(2) {
+    text-align: right;
+  }
+
+  table select {
+    width: 300px;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: transparent;
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: bold;
+  }
+  #produits-list > div {
+    display: block !important;
+    margin: 10px auto;
+  }
 }
 
 /* Écrans petits : téléphones */
@@ -743,6 +792,65 @@ body {
 
   .product-image {
     max-height: 500px;
+  }
+
+  /* Partie panier */
+
+  td::before {
+    content: "";
+    font-weight: bold;
+  }
+  thead {
+    display: none;
+  }
+  table,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+    width: 100%;
+    text-align: center !important;
+  }
+
+  #produits-list > div:last-child {
+    display: flex !important;
+    flex-direction: column;
+    margin: auto;
+  }
+
+  #produits-list > div:last-child > h2 {
+    font-size: 24px;
+  }
+
+  #produits-list > div:last-child > div {
+    display: flex;
+    button {
+      padding: 5px;
+      margin: 20px;
+    }
+  }
+
+  /* td[data-label="Description"] {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; /* ajuste selon ton besoin */
+  /* } */
+
+  td[data-label="Description"] {
+    max-height: 200px;
+    overflow: scroll;
+  }
+
+
+  /* Page details */
+  .detail {
+    width: 100%;
+    height: auto;
+  }
+  .example-wrapper {
+    width: 100%;
   }
 }
 

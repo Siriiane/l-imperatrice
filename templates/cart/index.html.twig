@@ -1,69 +1,72 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<section class="contain">
-<div class="contain">
-		<h1 id="h1-panier">Panier</h1>
-	<div id="produits-list" style="min-height: 70vh;">
-		{% if produits is empty %}
-			<div id="cart">
-				<p>Votre panier est vide.</p>
-			</div>
-		{% else %}
-			<table>
-				<thead>
-					<tr>
-						<th>Nom</th>
-						<th>Description</th>
-						<th>Prix unitaire</th>
-						<th>Quantité</th>
-						<th>Total par article</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for produit in produits %}
-						<tr id="product-row-{{ produit.produit.id }}">
-							<td>{{ produit.produit.nom }}</td>
-							<td>{{ produit.produit.description }}</td>
-							<td>
-								<span id="unit-price-{{ produit.produit.id }}">{{ produit.produit.prix | number_format(2, ',', ' ') }}
-								</span>€</td>
-							<td>
-								<select class="quantity-select" data-product-id="{{ produit.produit.id }}" data-url="{{ path('update_quantity') }}">
-									{% for i in 1..10 %}
-										<option value="{{ i }}" {% if i == produit.quantite %} selected {% endif %}>{{ i }}</option>
-									{% endfor %}
-								</select>
-							</td>
-							<td id="total-item-price-{{ produit.produit.id }}">{{ produit.totalItemPrice | number_format(2, ',', ' ') }}
-								€</td>
-							<td>
-								<button class="remove-from-cart" onclick="deleteArticle(event, {{ produit.produit.id }})">
-									Retirer du panier
-								</button>
-							</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-
-			<!-- à Mettre en CSS la DIV et le Bouton -->
-			<div style="display: flex; align-items: center; justify-content: space-between;">
-				<h2>Total général :
-					<span id="total-price">{{ totalPrice | number_format(2, ',', ' ') }}</span>
-					€</h2>
-					<div>
-				<button id="total-empty-cart" data-url="{{path('delete_cart')}}" style="margin-left: 10px;">
-					Vider le panier
-				</button>
-				<button>
-					<a href="{{path('app_adresse')}}">Valider le panier</a>
-				</button>
+	<section class="contain">
+		<div class="contain">
+			<h1 id="h1-panier">Panier</h1>
+			<div id="produits-list" style="min-height: 70vh;">
+				{% if produits is empty %}
+					<div id="cart">
+						<p>Votre panier est vide.</p>
 					</div>
+				{% else %}
+					<table>
+						<thead>
+							<tr>
+								<th>Nom</th>
+								<th>Description</th>
+								<th>Prix unitaire</th>
+								<th>Quantité</th>
+								<th>Total par article</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for produit in produits %}
+								<tr id="product-row-{{ produit.produit.id }}">
+									<td data-label="Nom">{{ produit.produit.nom }}</td>
+									<td data-label="Description">{{ produit.produit.description }}</td>
+									<td data-label="Prix unitaire">
+										<span id="unit-price-{{ produit.produit.id }}">{{ produit.produit.prix | number_format(2, ',', ' ') }}€</span>
+									</td>
+									<td data-label="Quantité">
+										<select class="quantity-select" data-product-id="{{ produit.produit.id }}" data-url="{{ path('update_quantity') }}">
+											{% for i in 1..10 %}
+												<option value="{{ i }}" {% if i == produit.quantite %} selected {% endif %}>{{ i }}</option>
+											{% endfor %}
+										</select>
+									</td>
+									<td data-label="Total" id="total-item-price-{{ produit.produit.id }}">
+										{{ produit.totalItemPrice | number_format(2, ',', ' ') }}
+										€
+									</td>
+									<td data-label="Actions">
+										<button class="remove-from-cart" onclick="deleteArticle(event, {{ produit.produit.id }})">
+											Retirer du panier
+										</button>
+									</td>
+								</tr>
+
+							{% endfor %}
+						</tbody>
+					</table>
+
+					<!-- à Mettre en CSS la DIV et le Bouton -->
+					<div style="display: flex; align-items: center; justify-content: space-between;">
+						<h2>Total général :
+							<span id="total-price">{{ totalPrice | number_format(2, ',', ' ') }}</span>
+							€</h2>
+						<div>
+							<button id="total-empty-cart" data-url="{{path('delete_cart')}}" style="margin-left: 10px;">
+								Vider le panier
+							</button>
+							<button>
+								<a href="{{path('app_adresse')}}">Valider le panier</a>
+							</button>
+						</div>
+					</div>
+				{% endif %}
 			</div>
-		{% endif %}
-	</div>
-</div>
-</section>
+		</div>
+	</section>
 {% endblock %}
