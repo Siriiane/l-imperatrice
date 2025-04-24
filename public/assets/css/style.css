@@ -37,11 +37,6 @@
    Body
 ========================================== */
 
-body {
-  /* background-color: #292929; */
-  /* font-family: "Playfair", display; */
-}
-
 /* ==========================================
    Typographie
 ========================================== */
@@ -83,7 +78,7 @@ h1 {
 }
 
 .confirmation {
-  color: whit;
+  color: white;
   text-align: center;
   font-size: 2rem;
 }
@@ -745,6 +740,9 @@ body {
     display: none;
   }
 
+  .contact {
+    width: 100%;
+  }
   /* Menu burger */
   .burger_menu {
     display: flex;
@@ -842,7 +840,6 @@ body {
     max-height: 200px;
     overflow: scroll;
   }
-
 
   /* Page details */
   .detail {
